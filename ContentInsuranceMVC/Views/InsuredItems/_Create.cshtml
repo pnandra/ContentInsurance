@@ -1,0 +1,55 @@
+﻿@model ContentInsuranceMVC.Models.InsuredItem
+
+<h4>Add New Insured Item</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Value" class="control-label"></label>
+                    <input asp-for="Value" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Category</label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryName"></select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">                    
+                    <input type="submit" value="Add" class="btn btn-primary" onclick="ValidateNumber()"/>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function ValidateNumber() {
+        var x;
+
+        // Get the value of the input field with id
+        x = document.getElementById("Value").value;
+
+        // If x is Not a Number or less than zero 
+        if (isNaN(x) || x < 0) {
+            alert("Item value must be greater than zero");
+        }         
+    }
+</script>
